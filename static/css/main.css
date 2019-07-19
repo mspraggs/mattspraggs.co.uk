@@ -92,6 +92,10 @@
     margin: 0 auto;
 }
 
+#content h1 {
+    font-size: 24pt;
+}
+
 h2 {
     font-size: 20pt;
 }
