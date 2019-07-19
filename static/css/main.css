@@ -1,0 +1,157 @@
+@import url('https://fonts.googleapis.com/css?family=Bitter:400,700|Open+Sans:400,400i,700|Roboto+Mono&display=swap');
+
+#index {
+    margin: 0;
+}
+
+#banner {
+    text-align: center;
+}
+
+#banner h1 {
+    font-size: 32pt;
+    color: #112;
+    margin-top: 0;
+    padding-top: 0.5em;
+}
+
+#social {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+#social li {
+    display: inline;
+    list-style: none;
+    margin: 0 5px;
+}
+
+#social img {
+    width: 48px;
+    height: 48px;
+}
+
+#nav-toggle {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    background-color: #233;
+    border-radius: 0 0 3px 0;
+}
+
+.hamburger-inner, .hamburger-inner::before, .hamburger-inner::after {
+    background-color: #eee !important;
+}
+
+#portrait {
+    border-radius: 100%;
+    width: 144px;
+    margin-top: 4em;
+}
+
+#menu {
+    position: absolute;
+    overflow: hidden;
+    padding: 0;
+    width: 0;
+    top: 0;
+    left: 0;
+    height: auto;
+    transition: width 0.2s;
+    z-index: 1;
+    background-color: #112;
+    color: #fff;
+}
+
+#strapline {
+    padding: 0 1em;
+    color: #eee;
+}
+
+#menu-items {
+    list-style: none;
+    padding: 0 1em;
+}
+
+.menu-item {
+    line-height: 2em;
+    font-size: 14pt;
+}
+
+.menu-item a {
+    color: #eee;
+}
+
+#content {
+    width: 80%;
+    max-width: 800px;
+    left: auto;
+    right: auto;
+    margin: 0 auto;
+}
+
+h2 {
+    font-size: 20pt;
+}
+
+.entry-content {
+    text-align: justify;
+}
+
+code, .highlight {
+    font-size: 12pt;
+    background-color: #eee;
+    border-radius: 4px;
+}
+
+code {
+    padding: 2px;
+}
+
+.highlight {
+    padding: 10px;
+}
+
+#content img {
+    max-width: 100%;
+}
+
+#post-list {
+    list-style: none;
+    padding: 0;
+}
+
+h1, h2, h3 {
+    font-family: 'Bitter', serif;
+    color: #112;
+}
+
+p, time, address, li {
+    font-family: 'Open Sans', sans-serif;
+    color: #112;
+}
+
+#content li, p {
+    font-size: 14pt;
+    line-height: 1.5em;
+}
+
+footer p, p.paginator {
+    font-size: 12pt;
+}
+
+a {
+    text-decoration: none;
+    color: #233;
+}
+
+a:hover {
+    color: #667;
+}
+
+#contentinfo {
+    text-align: center;
+    margin: 1em 0;
+}
