@@ -7,15 +7,25 @@ $(document).ready(function () {
     }
     
     set_nav_state(state);
-
-    let menu = $('#menu');
-    menu.height(get_menu_height());
+    position_for_screen_size();
 });
 
 $(window).on('resize', function () {
+    position_for_screen_size();
+});
+
+function position_for_screen_size() {
+    let social = $("#social");
     let menu = $('#menu');
     menu.height(get_menu_height());
-});
+
+    let heading = $("#banner h1");
+    let heading_padding = (
+        ($(window).width() < 900) ?
+        (social.height() + "px") : "0.5em"
+    );
+    heading.css("padding-top", heading_padding);
+}
 
 $('#nav-toggle').click(function () {
 

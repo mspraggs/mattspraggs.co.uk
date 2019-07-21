@@ -21,6 +21,10 @@
     right: 0;
 }
 
+#social ul {
+    padding-left: 72px;
+}
+
 #social li {
     display: inline;
     list-style: none;
