@@ -63,7 +63,6 @@
     top: 0;
     left: 0;
     height: auto;
-    transition: width 0.2s;
     z-index: 1;
     background-color: #112;
     color: #fff;
