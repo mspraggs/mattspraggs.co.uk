@@ -6,26 +6,16 @@ $(document).ready(function () {
         Cookies.set('nav-state', state, { expires: 7 });
     }
     
-    set_nav_state(state);
-    position_for_screen_size();
+    set_nav_state(state, false);
+
+    let menu = $('#menu');
+    menu.height(get_menu_height());
 });
 
 $(window).on('resize', function () {
-    position_for_screen_size();
-});
-
-function position_for_screen_size() {
-    let social = $("#social");
     let menu = $('#menu');
     menu.height(get_menu_height());
-
-    let heading = $("#banner h1");
-    let heading_padding = (
-        ($(window).width() < 900) ?
-        (social.height() + "px") : "0.5em"
-    );
-    heading.css("padding-top", heading_padding);
-}
+});
 
 $('#nav-toggle').click(function () {
 
@@ -37,13 +27,16 @@ $('#nav-toggle').click(function () {
 
     state = (state == 'visible') ? 'hidden' : 'visible';
 
-    set_nav_state(state);
+    set_nav_state(state, true);
 });
 
-function set_nav_state(state) {
+function set_nav_state(state, animate) {
 
     let button = $('#nav-toggle');
     let menu = $('#menu');
+
+    let transition = animate ? 'width 0.2s' : 'width 0.0s';
+    menu.css('transition', transition);
 
     if (state == 'visible') {
         if (!button.hasClass('is-active')) {
