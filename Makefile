@@ -9,6 +9,7 @@ CONFFILE=$(BASEDIR)/pelicanconf.py
 PUBLISHCONF=$(BASEDIR)/publishconf.py
 
 S3_BUCKET=www.mattspraggs.co.uk
+DISTRIBUTION=E2JOHJ1F6I2B6K
 
 
 DEBUG ?= 0
@@ -76,6 +77,9 @@ publish:
 
 s3_upload: publish
 	aws s3 sync $(OUTPUTDIR)/ s3://$(S3_BUCKET) --acl public-read --delete
+
+invalidate_cloudfront:
+	aws cloudfront create-invalidation --distribution-id $(DISTRIBUTION) --paths="/*"
 
 
 .PHONY: html help clean regenerate serve serve-global devserver stopserver publish s3_upload
