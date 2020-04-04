@@ -42,3 +42,13 @@ THEME = '.'
 STRAPLINE = 'Software engineer. Ex-physicist. Funny surname.'
 
 AUTHOR_SAVE_AS = ''
+
+PLUGIN_PATHS = ['plugins']
+PLUGINS = ['read_more_link']
+
+# "Read more" link configuration
+SUMMARY_MAX_LENGTH = 150
+READ_MORE_LINK_TEXT = '<span> Read more</span>'
+READ_MORE_LINK_TEMPLATE = (
+    '<a class="read-more" href="{{ url }}">{{ text }}</a>'
+)
