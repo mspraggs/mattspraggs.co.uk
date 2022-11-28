@@ -44,7 +44,11 @@ def insert_read_more_link(instance):
 
     summary = (
         getattr(instance, '_summary', None)
-        or truncate_html_words(instance.content, summary_max_length)
+        or truncate_html_words(
+            instance.content,
+            summary_max_length,
+            end_text=f"…&nbsp;",
+        )
     )
 
     if summary != instance.content:

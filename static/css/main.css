@@ -15,43 +15,24 @@
     padding-top: 0.5em;
 }
 
-#social {
-    position: absolute;
-    top: 0;
-    right: 0;
-}
-
-#social ul {
-    padding-left: 72px;
-}
-
-#social li {
-    display: inline;
-    list-style: none;
-    margin: 0 5px;
-}
-
-#social img {
-    width: 48px;
-    height: 48px;
-}
-
 #nav-toggle {
     position: absolute;
     top: 0;
     left: 0;
     z-index: 2;
-    background-color: #233;
+    background-color: #fff;
     border-radius: 0 0 3px 0;
 }
 
-.hamburger-inner, .hamburger-inner::before, .hamburger-inner::after {
-    background-color: #eee !important;
+.hamburger-inner,
+.hamburger-inner::before,
+.hamburger-inner::after {
+    background-color: #112 !important;
 }
 
 #portrait {
     border-radius: 100%;
-    width: 144px;
+    width: 180px;
     margin-top: 4em;
 }
 
@@ -87,6 +68,42 @@
     color: #eee;
 }
 
+#tag-list {
+    list-style: none;
+    padding: 0 0.5em;
+}
+
+.tag {
+    line-height: 2em;
+    font-size: 10pt;
+}
+
+.tag a {
+    color: #eee;
+}
+
+#social {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
+
+    text-align: justify;
+    -ms-text-justify: distribute-all-lines;
+    text-justify: distribute-all-lines;
+    height: 50px;
+}
+
+#social a {
+    vertical-align: middle;
+    display: inline-block;
+    *display: inline;
+    zoom: 1;
+}
+
+#social img {
+    width: 50px;
+}
+
 #content {
     width: 80%;
     max-width: 800px;
@@ -103,7 +120,8 @@ h2 {
     text-align: justify;
 }
 
-code, .highlight {
+code,
+.highlight {
     font-size: 12pt;
     background-color: #eee;
     border-radius: 4px;
@@ -126,22 +144,29 @@ code {
     padding: 0;
 }
 
-h1, h2, h3 {
+h1,
+h2,
+h3 {
     font-family: 'Bitter', serif;
     color: #112;
 }
 
-p, time, address, li {
+p,
+time,
+address,
+li {
     font-family: 'Open Sans', sans-serif;
     color: #112;
 }
 
-#content li, p {
+#content li,
+p {
     font-size: 14pt;
     line-height: 1.5em;
 }
 
-footer p, p.paginator {
+footer p,
+p.paginator {
     font-size: 12pt;
 }
 
@@ -151,10 +176,26 @@ a {
 }
 
 a:hover {
-    color: #667;
+    color: #930;
+}
+
+li>a,
+p>a {
+    color: #33c;
+}
+
+p>a:hover {
+    text-decoration: underline;
 }
 
 #contentinfo {
     text-align: center;
     margin: 1em 0;
+}
+
+.stretch {
+    width: 100%;
+    display: inline-block;
+    font-size: 0;
+    line-height: 0
 }

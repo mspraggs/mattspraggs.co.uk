@@ -24,8 +24,6 @@ LINKS = (('Pelican', 'http://getpelican.com/'),
 
 # Social widget
 SOCIAL = (
-    ('facebook.png', 'https://www.facebook.com/matthew.spraggs'),
-    ('twitter.png', 'https://twitter.com/Orentago'),
     ('linkedin.png', 'https://www.linkedin.com/in/matthew-spraggs-990725a2'),
     ('github.png', 'https://github.com/mspraggs/'),
     ('rss.png', f'{SITEURL}/feeds/matt-spraggs.rss.xml'),
@@ -44,11 +42,11 @@ STRAPLINE = 'Software engineer. Ex-physicist. Funny surname.'
 AUTHOR_SAVE_AS = ''
 
 PLUGIN_PATHS = ['plugins']
-PLUGINS = ['read_more_link']
+PLUGINS = ['read_more_link', 'sort_tags']
 
 # "Read more" link configuration
 SUMMARY_MAX_LENGTH = 150
-READ_MORE_LINK_TEXT = '<span> Read more</span>'
+READ_MORE_LINK_TEXT = '<span>Read more</span>'
 READ_MORE_LINK_TEMPLATE = (
     '<a class="read-more" href="{{ url }}">{{ text }}</a>'
 )
