@@ -1,34 +1,31 @@
-$(document).ready(function () {
-    let state = Cookies.get('nav-state');
-    
-    if (state == null) {
-        state = 'hidden';
-        Cookies.set('nav-state', state, { expires: 7 });
-    }
-    
+function nav_init() {
+    let state = get_nav_state(true);
     set_nav_state(state, false);
+    adjust_nav_menu();
+}
 
+function nav_toggle() {
+    let state = get_nav_state(false);
+    set_nav_state((state == 'visible') ? 'hidden' : 'visible', true);
+}
+
+function adjust_nav_menu() {
     let menu = $('#menu');
     menu.height(get_menu_height());
-});
+}
 
-$(window).on('resize', function () {
-    let menu = $('#menu');
-    menu.height(get_menu_height());
-});
-
-$('#nav-toggle').click(function () {
-
+function get_nav_state(set) {
     let state = Cookies.get('nav-state');
 
     if (state == null) {
         state = 'hidden';
+        if (set) {
+            Cookies.set('nav_state', state, { expires: 7 });
+        }
     }
 
-    state = (state == 'visible') ? 'hidden' : 'visible';
-
-    set_nav_state(state, true);
-});
+    return state;
+}
 
 function set_nav_state(state, animate) {
 
@@ -43,13 +40,13 @@ function set_nav_state(state, animate) {
             button.addClass('is-active');
         }
 
-        menu.css('padding', '1em').width('144px');
+        menu.css('padding', '1em').width('180px');
     }
     else if (state == 'hidden') {
         if (button.hasClass('is-active')) {
             button.removeClass('is-active');
         }
-        
+
         menu.width(0).delay(200).queue(function (next) {
             $(this).css('padding', 0);
             next();
