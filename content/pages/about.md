@@ -33,6 +33,8 @@ Outside of work I've spun-up a number of personal projects, including:
 * [Loxx]({filename}../lox-cpp-14-virtual-machine-bytecode.md) - my own
   C++14 implementation of the
   [toy language Lox](https://craftinginterpreters.com/).
+* [SIR model](https://mspraggs.github.io/sir_model/index.html) - solving the SIR
+  model with Rust and WebAssembly.
 * [Týr](https://tyr.mattspraggs.co.uk) - lockdown project recording atmospheric
   readings for St Albans, UK, using an Arduino.
 
