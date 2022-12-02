@@ -24,7 +24,7 @@ LINKS = (('Pelican', 'http://getpelican.com/'),
 
 # Social widget
 SOCIAL = (
-    ('linkedin.png', 'https://www.linkedin.com/in/matthew-spraggs-990725a2'),
+    ('linkedin.png', 'https://www.linkedin.com/in/matt-spraggs'),
     ('github.png', 'https://github.com/mspraggs/'),
     ('rss.png', f'{SITEURL}/feeds/matt-spraggs.rss.xml'),
 )
