@@ -75,6 +75,6 @@ page. You can view the finished result
 [here](https://mspraggs.github.io/sir_model/index.html).
 
 The SIR model itself highlights the importance of social distancing: by cutting
-the rate at which the virus spreads through tue population we can not only
+the rate at which the virus spreads through the population we can not only
 lessen the peak number of infections but potentially limit the number of people
 infected by the virus overall.
