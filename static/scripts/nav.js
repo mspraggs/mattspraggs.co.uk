@@ -40,17 +40,14 @@ function set_nav_state(state, animate) {
             button.addClass('is-active');
         }
 
-        menu.css('padding', '1em').width('180px');
+        menu.width(get_menu_width());
     }
     else if (state == 'hidden') {
         if (button.hasClass('is-active')) {
             button.removeClass('is-active');
         }
 
-        menu.width(0).delay(200).queue(function (next) {
-            $(this).css('padding', 0);
-            next();
-        });
+        menu.width(0);
     }
 
     Cookies.set('nav-state', state, { expires: 7 });
@@ -75,4 +72,15 @@ function get_menu_height() {
         document_height,
         $(window).height()
     ) - menu_padding;
+}
+
+function get_menu_width() {
+
+    let content = $("#menu-inner")
+
+    let menu_padding =
+        parseInt(content.css("padding-left").slice(0, -2)) +
+        parseInt(content.css("padding-right").slice(0, -2));
+
+    return menu_padding + content.width()
 }

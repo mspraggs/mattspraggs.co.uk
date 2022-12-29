@@ -39,7 +39,6 @@
 #menu {
     position: absolute;
     overflow: hidden;
-    padding: 0;
     width: 0;
     top: 0;
     left: 0;
@@ -47,6 +46,11 @@
     z-index: 1;
     background-color: #112;
     color: #fff;
+}
+
+#menu-inner {
+    padding: 1em;
+    width: 180px;
 }
 
 #strapline {
