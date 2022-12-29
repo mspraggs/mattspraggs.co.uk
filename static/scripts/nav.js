@@ -65,7 +65,7 @@ function get_menu_height() {
     let document_height = (
         footer.offset().top +
         footer.height() +
-        footer.css("margin-bottom").slice(0, -2)
+        parseInt(footer.css("margin-bottom").slice(0, -2))
     );
 
     return Math.max(
