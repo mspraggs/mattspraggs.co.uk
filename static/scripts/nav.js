@@ -20,7 +20,7 @@ function get_nav_state(set) {
     if (state == null) {
         state = 'hidden';
         if (set) {
-            Cookies.set('nav_state', state, { expires: 7 });
+            Cookies.set('nav-state', state, { expires: 7 });
         }
     }
 
