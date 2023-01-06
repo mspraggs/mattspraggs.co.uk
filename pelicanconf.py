@@ -29,6 +29,10 @@ SOCIAL = (
     ('rss.png', f'{SITEURL}/feeds/matt-spraggs.rss.xml'),
 )
 
+SITEMAP = {
+    'exclude': ['drafts/'],
+}
+
 DEFAULT_PAGINATION = 10
 SUMMARY_MAX_LENGTH = 150
 
@@ -42,7 +46,7 @@ STRAPLINE = 'Software engineer. Ex-physicist. Funny surname.'
 AUTHOR_SAVE_AS = ''
 
 PLUGIN_PATHS = ['plugins']
-PLUGINS = ['read_more_link', 'sort_tags']
+PLUGINS = ['read_more_link', 'sort_tags', 'pelican.plugins.sitemap']
 
 # "Read more" link configuration
 SUMMARY_MAX_LENGTH = 150
