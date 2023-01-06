@@ -165,6 +165,7 @@ h3 {
     font-size: 16pt;
 }
 
+.entry-content,
 p,
 time,
 address,
@@ -193,6 +194,7 @@ a:hover {
     color: #930;
 }
 
+.entry-content a,
 li>a,
 p>a {
     color: #33c;
