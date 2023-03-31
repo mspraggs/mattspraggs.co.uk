@@ -19,6 +19,8 @@ def insert_into_last_element(html, element):
     item = fragment_fromstring(element)
 
     doc = fragments_fromstring(html)
+    if doc[-1].tag != 'p':
+        doc.append(fragment_fromstring("<p></p>"))
     doc[-1].append(item)
 
     return ''.join(tostring(e).decode() for e in doc)
