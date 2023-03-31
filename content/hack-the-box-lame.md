@@ -1,7 +1,7 @@
 Title: Hack The Box: Lame
 Date: 2023-01-02
 Category: Blog
-Tags: Cybersecurity, Hack The Box, Infosec
+Tags: CTF, Cybersecurity, Hack The Box
 Author: Matt Spraggs
 
 I've been doing a lot of [Hack The Box](https://www.hackthebox.com/) lately. For
