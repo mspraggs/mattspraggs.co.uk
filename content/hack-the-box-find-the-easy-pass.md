@@ -1,7 +1,7 @@
 Title: Hack The Box: Find The Easy Pass
 Date: 2023-01-22
 Category: Blog
-Tags: Cybersecurity, Hack The Box, Infosec
+Tags: CTF, Cybersecurity, Hack The Box
 Author: Matt Spraggs
 
 This is the second in a series of write-ups of challenges from the
