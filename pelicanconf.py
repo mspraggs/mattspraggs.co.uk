@@ -46,7 +46,12 @@ STRAPLINE = 'Software engineer. Ex-physicist. Funny surname.'
 AUTHOR_SAVE_AS = ''
 
 PLUGIN_PATHS = ['plugins']
-PLUGINS = ['read_more_link', 'sort_tags', 'pelican.plugins.sitemap']
+PLUGINS = [
+    'read_more_link',
+    'sort_tags',
+    'pelican.plugins.sitemap',
+    'pelican.plugins.render_math',
+]
 
 # "Read more" link configuration
 SUMMARY_MAX_LENGTH = 150
