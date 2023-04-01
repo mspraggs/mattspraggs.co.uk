@@ -9,8 +9,7 @@ window.MathJax = {
           linebreaks: { automatic: "false" },
           font: "TeX"},
     NativeMML: {scale: 100},
-    TeX: { equationNumbers: {autoNumber: "AMS"},
-           MultLineWidth: "85%",
+    TeX: { MultLineWidth: "85%",
            TagSide: "right",
            TagIndent: ".8em"
     }
