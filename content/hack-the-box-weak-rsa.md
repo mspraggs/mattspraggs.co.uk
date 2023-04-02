@@ -138,10 +138,10 @@ theorem states that, given the following:
 
 $$
 \begin{gather}
-N = pq\\\\
-q < p < 2q\\\\
-e d \equiv 1 \space \left(\text{mod} \space \varphi(N)\right)\\\\
-d < \frac{1}{3}N^\frac{1}{4}\\
+N = pq\\\\\\\\
+q < p < 2q\\\\\\\\
+e d \equiv 1 \space \left(\text{mod} \space \varphi(N)\right)\\\\\\\\
+d < \frac{1}{3}N^\frac{1}{4}\\\\
 \end{gather}
 $$
 
@@ -207,9 +207,9 @@ derive a quadratic equation in $p$:
 
 $$
 \begin{align}
-\varphi(N) & = (p - 1)(p - 1) &\\
-& = p q - p - q + 1 &\\
-& = N - p - \frac{N}{p} + 1 &\\
+\varphi(N) & = (p - 1)(p - 1) &\\\\
+& = p q - p - q + 1 &\\\\
+& = N - p - \frac{N}{p} + 1 &\\\\
 \end{align}
 $$
 

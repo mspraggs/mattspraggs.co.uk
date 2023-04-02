@@ -216,6 +216,6 @@ p>a:hover {
     line-height: 0
 }
 
-.MathJax span {
-    font-size: 14pt;
+mjx-container {
+    font-size: 12pt;
 }
