@@ -50,7 +50,6 @@ PLUGINS = [
     'read_more_link',
     'sort_tags',
     'pelican.plugins.sitemap',
-    'pelican.plugins.render_math',
 ]
 
 # "Read more" link configuration
