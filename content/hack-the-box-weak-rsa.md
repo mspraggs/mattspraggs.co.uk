@@ -174,7 +174,7 @@ So we expect $\frac{e}{pq}$ to be slightly smaller than $\frac{k}{d}$, up to
 some fraction $\delta$. We know $e$ and $pq$ as they define the public key, but
 how can we use (3) to determine $\frac{k}{d}$?
 
-In the paper orignally describing this attack, Wiener outlines how we can find
+In the paper originally describing this attack, Wiener outlines how we can find
 $\frac{k}{d}$ using
 [continued fractions](https://en.wikipedia.org/wiki/Continued_fraction). A
 continued fraction takes the form
