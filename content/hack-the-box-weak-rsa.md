@@ -18,7 +18,7 @@ expectations of what a
 This challenge, Weak RSA, is similar in the sense that we're given two files to
 download. This time though, neither of them are executable:
 
-```shell
+```shell-session
 $ file key.pub
 key.pub: ASCII text
 $ file flag.enc 
@@ -27,7 +27,7 @@ flag.enc: data
 
 Looking at the contents of `key.pub`, it looks like an RSA public key:
 
-```shell
+```shell-session
 $ cat key.pub 
 -----BEGIN PUBLIC KEY-----
 MIIBHzANBgkqhkiG9w0BAQEFAAOCAQwAMIIBBwKBgQMwO3kPsUnaNAbUlaubn7ip
@@ -42,7 +42,7 @@ lb/N
 
 We can confirm this with [OpenSSL](https://www.openssl.org/):
 
-```shell
+```shell-session
 $ openssl rsa -pubin -in key.pub -text -noout
 RSA Public-Key: (1026 bit)
 Modulus:
@@ -245,7 +245,7 @@ up using Go. Unfortunately, Go's standard library doesn't support
 RSA public keys with large exponents, so I had to cook up a few custom types.
 Running my code against the provided public key gives the following:
 
-```shell
+```shell-session
 $ cat key.pub | go run main.go
 -----BEGIN RSA PRIVATE KEY-----
 MIICOQIBAAKBgQMwO3kPsUnaNAbUlaubn7ip4pNEXjvUOxjvLwUhtybr6Ng4undL
@@ -265,7 +265,7 @@ m4nt2AaIDcxiVYddLwIMPou3EKoosBIjxTUCQQCnqbJMPEQHpg5lI6MQi8ixFRqo
 
 Pasting this into a file, we can use OpenSSL to decrypt the provided flag:
 
-```shell
+```shell-session
 $ cat flag.enc | openssl rsautl -decrypt -inkey key
 HTB{s1mpl3_Wi3n3rs_4tt4ck}
 ```

