@@ -5,7 +5,7 @@ Tags: CTF, Cybersecurity, Hack The Box
 Author: Matt Spraggs
 
 This is my seventh write-up of the [Hack The Box](https://www.hackthebox.com)
-beginner track. This is the first machine or challenge in the track labelled
+Beginner Track. This is the first machine or challenge in the track labelled
 "medium" difficulty. The others have so far been "easy", so this could be a bit
 more involved than what we've seen so far. Let's dive in.
 
