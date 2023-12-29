@@ -152,14 +152,8 @@ variables are allocated on the
 [stack](https://en.wikipedia.org/wiki/Call_stack), and each time a function is
 called that stack grows towards lower memory addresses.
 
-```text
-<----------- Direction of stack growth ------
-┌────────────────────────────────┬──────────┐
-│ buf                            │  result  │
-└────────────────────────────────┴──────────┘
------- Increasing memory addresses --------->
------- Older function calls ---------------->
-```
+
+![Stack layout]({attach}images/hack-the-box-you-know-0xdiablos/stack.svg)
 
 The next thing to note is that the code uses `strcpy`. The
 [manpage](https://linux.die.net/man/3/strcpy) for `strcpy` starts like this:

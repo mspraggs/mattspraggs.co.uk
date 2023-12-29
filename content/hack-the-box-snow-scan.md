@@ -226,14 +226,7 @@ this return address is eight bytes beyond the saved frame pointer, `rbp`. In
 between this address and the start of `pixelBuf` lie both a pointer to the start
 of `pixelBuf` itself, _and_ the integer used to index into `pixelBuf`, i.e.:
 
-```text
-<---------------------------------------- Direction of stack growth ------
-┌────────────────────────────────┬─────────────┬─────────┬───────────────┐
-│ pixelBuf                       │  &pixelBuf  │  index  │  return addr  │
-└────────────────────────────────┴─────────────┴─────────┴───────────────┘
------- Increasing memory addresses -------------------------------------->
------- Older function calls --------------------------------------------->
-```
+![Snow Scan stack]({attach}images/hack-the-box-snow-scan/stack.svg)
 
 This is actually pretty annoying, because any attempt to overflow the buffer
 will end up overwriting the pointer used to reference the buffer. We need to
