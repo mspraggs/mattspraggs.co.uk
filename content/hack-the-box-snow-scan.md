@@ -197,14 +197,14 @@ Loading a byte from the bitmap file into the destination buffer is done with
 the assembly `mov BYTE PTR [rdx+rax*1], cl`. `rdx` and `rax` are read from
 memory offsets `rbp-0x60` and `rbp-0x34`, respectively. Our buffer overflow will
 need to overwrite the return address of `main`, which almost certainly sits
-beyond these memory locations from of the point of view of `pixelBuf`. We can
+beyond these memory locations from the point of view of `pixelBuf`. We can
 confirm this with GDB:
 
 ```shell-session
 gdb-peda$ break *(main+435)
 Breakpoint 1 at 0x402514
 gdb-peda$ r dummy.bmp
-Starting program: /home/matthew/Programming/HackTheBox/BusinessCTF2023/SnowScan/challenge/snowscan dummy.bmp
+Starting program: ./snowscan dummy.bmp
 [--- SNIP ---]
 Breakpoint 1, 0x0000000000402514 in main ()
 gdb-peda$ bt
