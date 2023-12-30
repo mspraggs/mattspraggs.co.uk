@@ -15,12 +15,12 @@ function adjust_nav_menu() {
 }
 
 function get_nav_state(set) {
-    let state = Cookies.get('nav-state');
+    let state = localStorage.getItem('nav-state');
 
     if (state == null) {
         state = 'hidden';
         if (set) {
-            Cookies.set('nav-state', state, { expires: 7 });
+            localStorage.setItem('nav-state', state);
         }
     }
 
@@ -50,7 +50,7 @@ function set_nav_state(state, animate) {
         menu.width(0);
     }
 
-    Cookies.set('nav-state', state, { expires: 7 });
+    localStorage.setItem('nav-state', state);
 }
 
 function get_menu_height() {
