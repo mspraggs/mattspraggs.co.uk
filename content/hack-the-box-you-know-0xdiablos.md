@@ -191,10 +191,10 @@ after the first 200 bytes will be written in to the other variables in
 `trivial_example`, namely the `result` flag. This would allow us to manipulate
 the value of `result` in a way other than how the function author intended.
 
-Taking this further, the way that memory is laid out in x86 processor means that
-a function's return address sits after all the variables that are local to a
-function. The return address is the memory address of the next instruction that
-the CPU should execute after the function returns. Returning to the diagram
+Taking this further, the way that memory is laid out in an x86 processor means
+that a function's return address sits after all the variables that are local to
+that function. The return address is the memory address of the next instruction
+that the CPU should execute after the function returns. Returning to the diagram
 above, memory for a particular function is laid out like this:
 
 {! content/images/hack-the-box-you-know-0xdiablos/advanced-stack.svg !}
