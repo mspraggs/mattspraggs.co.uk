@@ -50,6 +50,7 @@ PLUGINS = [
     'fix_heading_tags',
     'read_more_link',
     'sort_tags',
+    'pelican.plugins.md_include',
     'pelican.plugins.sitemap',
 ]
 
