@@ -153,7 +153,7 @@ variables are allocated on the
 called that stack grows towards lower memory addresses.
 
 
-{! content/images/hack-the-box-you-know-0xdiablos/stack.svg !}
+{! content/images/hack-the-box-you-know-0xdiablos/basic-stack.svg !}
 
 The next thing to note is that the code uses `strcpy`. The
 [manpage](https://linux.die.net/man/3/strcpy) for `strcpy` starts like this:
@@ -197,14 +197,7 @@ function. The return address is the memory address of the next instruction that
 the CPU should execute after the function returns. Returning to the diagram
 above, memory for a particular function is laid out like this:
 
-```text
-<---------------------------- Direction of stack growth ------
-┌────────────────────────────────┬──────────┬────────────────┐
-│ buf                            │  result  │ return address │
-└────────────────────────────────┴──────────┴────────────────┘
------- Increasing memory addresses -------------------------->
------- Older function calls --------------------------------->
-```
+{! content/images/hack-the-box-you-know-0xdiablos/advanced-stack.svg !}
 
 The implications here are pretty major. If we have some place in memory we want
 to execute, we can tack the bytes of the corresponding memory address onto
