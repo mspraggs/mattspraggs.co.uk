@@ -47,6 +47,7 @@ AUTHOR_SAVE_AS = ''
 
 PLUGIN_PATHS = ['plugins']
 PLUGINS = [
+    'fix_heading_tags',
     'read_more_link',
     'sort_tags',
     'pelican.plugins.sitemap',
