@@ -126,7 +126,7 @@ video.
 To give you a rough idea of how they work, consider the following C function:
 
 ```c
-void trivial_example(const char* src) int {
+int trivial_example(const char* src) {
     int result = 0;
     char buf[200];
 
