@@ -8,8 +8,8 @@ OUTPUTDIR=$(BASEDIR)/output
 CONFFILE=$(BASEDIR)/pelicanconf.py
 PUBLISHCONF=$(BASEDIR)/publishconf.py
 
-S3_BUCKET=www.mattspraggs.co.uk
-DISTRIBUTION=E2JOHJ1F6I2B6K
+S3_BUCKET=${BUCKET}
+DISTRIBUTION=${DIST}
 
 
 DEBUG ?= 0
@@ -76,7 +76,7 @@ publish:
 	$(PELICAN) $(INPUTDIR) -o $(OUTPUTDIR) -s $(PUBLISHCONF) $(PELICANOPTS)
 
 s3_upload: publish
-	aws s3 sync $(OUTPUTDIR)/ s3://$(S3_BUCKET) --acl public-read --delete
+	aws s3 sync $(OUTPUTDIR)/ s3://$(S3_BUCKET) --delete
 
 invalidate_cloudfront:
 	aws cloudfront create-invalidation --distribution-id $(DISTRIBUTION) --paths="/*"
