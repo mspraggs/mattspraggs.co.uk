@@ -105,3 +105,6 @@ venv.bak/
 
 # Pelican stuff
 /output
+
+# Local env config
+/env
