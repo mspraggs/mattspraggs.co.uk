@@ -3,9 +3,9 @@ Date: 1970-01-01
 Category: About
 Author: Matt Spraggs
 
-I'm a physicist turned software engineer currently working as a backend engineer
-at [Thought Machine](https://www.thoughtmachine.net), a fintech scale-up in
-London.
+I'm a physicist turned software engineer currently working as a security
+engineer at [Thought Machine](https://www.thoughtmachine.net), a fintech
+scale-up in London.
 
 I received my first degree in Chemical Engineering from the University of
 Birmingham. In pursuit of pure science, I then did a PhD in Theoretical Particle
@@ -39,3 +39,6 @@ Outside of work I've spun-up a number of personal projects, including:
   readings for St Albans, UK, using an Arduino.
 
 Check out [my GitHub profile](https://github.com/mspraggs) for more.
+
+The views expressed on this site are my own and do not reflect those of my
+current or former employers.
