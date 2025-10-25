@@ -52,6 +52,7 @@ PLUGINS = [
     'sort_tags',
     'pelican.plugins.md_include',
     'pelican.plugins.sitemap',
+    'pelican.plugins.simple_footnotes',
 ]
 
 # "Read more" link configuration

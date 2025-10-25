@@ -194,7 +194,8 @@ p {
 }
 
 footer p,
-p.paginator {
+p.paginator,
+#content .simple-footnotes li {
     font-size: 12pt;
 }
 
