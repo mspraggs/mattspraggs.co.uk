@@ -7,6 +7,6 @@ Author: Matt Spraggs
 
 If you read [The Telegraph](http://www.telegraph.co.uk) online, you might have seen this appear recently:
 
-![Telegraph Article Limit](https://i.imgur.com/3uU1LKZ.png)
+![Telegraph Article Limit]({attach}images/how-get-around-telegraphs-article-limit/limit.png)
 
 Today I discovered how easy this is to get around: just delete the cookies The Telegraph deposits on your computer. To do this on Firefox, check out [this link](https://support.mozilla.org/en-US/kb/delete-cookies-remove-info-websites-stored#w_delete-cookies-for-a-single-site), and for Chrome, check [this link]() out. Finally, for Internet Explorer, click [here](https://support.microsoft.com/en-gb/kb/278835) for IE 6 to 9 and [here](http://windows.microsoft.com/en-gb/internet-explorer/delete-manage-cookies#ie=ie-11) for IE 10 to 11.
