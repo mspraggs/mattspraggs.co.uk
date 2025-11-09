@@ -384,7 +384,7 @@ location of `__free_hook` so that we can overwrite it with the address of
 metadata. This adds further complexity, and in my case further head ↔ brick wall
 activity.
 
-Feeling like I'd exxhausted my options, I snuck a look at the [official
+Feeling like I'd exhausted my options, I snuck a look at the [official
 write-up](https://github.com/hackthebox/stack-smash-2025/tree/master/Refreshments)
 for Refreshments. It mentions [House of
 Orange](https://guyinatuxedo.github.io/43-house_of_orange/house_orange_exp/index.html).
